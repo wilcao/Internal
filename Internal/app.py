@@ -135,7 +135,7 @@ def check_email():
         if result:
             return jsonify({ 'status': 'Error' })
         else:
-            return jsonify({ 'status': 'OK' })
+            return jsonify({ 'status': 'OK' }) 
 
 @app.errorhandler(404)
 def not_found(error):
