@@ -1,0 +1,54 @@
+{% extends '_layout.html' %}
+
+{% block title %} Signup! {% endblock %}
+
+{% block content %}
+    {% if First_name == "" %}
+<h1> hello, user</h1>
+    {% else %}
+<h1>HEY! {{ First_name }}</h1>
+    {% endif %}
+<div class="container">
+    <form>
+        <label for="First_name">First name</label>
+        <input id="First_name" type="text" name="First_name" placeholder="Shen" autocomplete="off" />
+        <br />
+        <label for="Last_name">Last name</label>
+        <input id="Last_name" type="text" name="last_name" placeholder="Alex" autocomplete="off" />
+        <br />
+        <label for="email">Email</label>
+        <input id="Email" type="email" name="email" required />
+        <br />
+        <label for="Password">Password</label>
+        <input id="Password" type="Password" name="Password" required />
+        <br />
+        <label for="Checkbox">Tank man real?</label>
+        <input id="Checkbox" type="Checkbox" name="Checkbox" value="yes" required checked />
+        <br />
+        <p>Gender:</p>
+        <label for="Gender_M">M</label>
+        <input id="Gender_M" type="radio" name="Gender_M" />
+        <label for="Gender_F">F</label>
+        <input id="Gender_F" type="radio" name="Gender_F" />
+
+        <label for="Gender_Other">Other</label>
+        <input id="Gender_Other" type="radio" name="Gender_Other" value="Other" disabled />
+        <input type="text" name="Gender_Other" id="Gender_other_text" />
+        <input type="hidden" name="secret" value="LEO PAN" />
+        <br />
+        <textarea id="Extra" name="Extra_info"></textarea>
+        <br />
+        <label for="Dropdown">What would you like</label>
+        <select id="Dropdown" name="product">
+            <option selected disabled hidden> SELECT NOW</option>
+            <option>social credits </option>
+            <option> Bing chilling</option>
+            <option value="no?">what?</option>
+        </select>
+        <br />
+        <input type="submit" value="????!?!?!?!?!?" />
+        <br />
+    </form>
+    <div class="example-box"></div>
+</div>
+    {% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="flex column">
+    <img class="profile-pic" src="{{url_for('static', filename='images/' + (result.avatar or 'default.png'))}}" />
+
+    <div class="flex row">
+        <p class="profile-name">{{result.first_name}} {{result.last_name}}</p>
+
+        <p class="profile-email">{{result.email}}</p>
+    </div>
+
+</div>
+{% endblock %}

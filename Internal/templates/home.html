@@ -1,0 +1,18 @@
+{% extends '_layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<a href="{{url_for('add_user')}}">Sign up</a>
+<br />
+{% if session['role'] == 'admin' %}
+<a href="{{url_for('userview')}}">List of users</a>
+<br />
+<a href="{{url_for('movieadd')}}">Add a movie</a>
+{% elif 'logged_in' in session %}
+<a href="{{ url_for('view_user', id=session['ID']) }}">View your account</a>
+<br />
+<a href="{{url_for('movieadd')}}">Add a movie</a>
+<br />
+{% endif %}
+{% endblock %}
