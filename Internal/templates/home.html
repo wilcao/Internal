@@ -8,11 +8,11 @@
 {% if session['role'] == 'admin' %}
 <a href="{{url_for('userview')}}">List of users</a>
 <br />
-<a href="{{url_for('movieadd')}}">Add a movie</a>
+<a href="{{url_for('add_subject')}}">Add a subject</a>
 {% elif 'logged_in' in session %}
 <a href="{{ url_for('view_user', id=session['ID']) }}">View your account</a>
 <br />
-<a href="{{url_for('movieadd')}}">Add a movie</a>
+<a href="{{url_for('add_subject')}}">Add a subject</a>
 <br />
 {% endif %}
 {% endblock %}

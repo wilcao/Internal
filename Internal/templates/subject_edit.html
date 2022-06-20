@@ -1,0 +1,30 @@
+{% extends '_layout.html' %}
+
+{% block title %}Edit subject{% endblock %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    <label for="title">Title</label>
+    <input id="title" name="title" />
+    <br />
+    <label for="subject">Subject</label>
+    <input id="subject" name="subject" />
+    <br />
+    <label for="description">Description</label>
+    <input id="description" name="description" />
+    <br />
+    <label for="start_date">Start date:</label>
+    <input type="date" id="start_date" name="start_date"
+           value="2022-01-01"
+           min="2022-01-01" max="2026-12-31">
+    <br />
+    <label for="end_date">End date:</label>
+
+    <input type="date" id="end_date" name="end_date"
+           value="2022-01-01"
+           min="2022-01-01" max="2026-12-31">
+    <br />
+    <input type="submit" value="edit" />
+</form>
+
+{% endblock %}

@@ -29,9 +29,17 @@ for row in result:
 
 @app.before_request
 def restrict():
-    restricted_pages = ['userview', 'view_user', 'delete', 'edit', 'movieview']
+    restricted_pages = ['userview', 'view_user', 'delete', 'edit']
     if 'logged_in' not in session and request.endpoint in restricted_pages: 
         return redirect('/login')
+
+@app.route('/subjects')
+def view_subject():
+        with create_connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT * FROM subject")
+                result = cursor.fetchall()
+        return render_template('subject_list.html', result=result)
 
 
 
@@ -113,6 +121,100 @@ def add_user():
                     return redirect(url_for('add_user'))
         return redirect('/')
     return render_template('users_add.html')
+
+@app.route('/subjectadd', methods=['GET', 'POST'])
+def add_subject():
+    if request.method== 'POST':
+        with create_connection() as connection:
+            with connection.cursor() as cursor:
+                sql ="""INSERT INTO subject ( title, subject, description, start_date, end_date) VALUES (%s, %s, %s, %s, %s)"""
+                values = (
+                    request.form['title'],
+                    request.form['subject'],
+                    request.form['description'],
+                    request.form['start_date'],
+                    request.form['end_date']
+                    )
+                cursor.execute(sql, values)
+                connection.commit()
+                return redirect(url_for('home'))
+        return redirect('/')
+    return render_template('subject_add.html')
+
+@app.route('/edit', methods=['GET', 'POST'])
+def edit():
+    if session['role'] != 'admin' and  str(session['ID']) != request.args['id']:
+        flash("you can't see it nor edit it")
+        return redirect('/view?id=' + request.args['id'])
+    if request.method == 'POST':
+       avatar_image=request.files['avatar']
+       ext = os.path.splitext(avatar_image.filename)[1]
+       avatar_filename= str(uuid.uuid4())[:8] + ext
+       avatar_image.save("static/images/" + avatar_filename)
+       if request.form['old_avatar'] != 'None':
+           os.remove("static/images/" + request.form['old_avatar'])
+       elif request.form['old_avatar'] != 'None':
+           avatar_filename = request.form['old_avatar']
+       else:
+           avatar_filename = None
+
+       with create_connection() as connection:
+           with connection.cursor() as cursor:
+               sql = """UPDATE users SET
+               first_name = %s,
+               last_name = %s,
+               email = %s,
+               avatar = %s,
+               WHERE id = %s
+               """
+               values = (
+                   request.form['first_name'],
+                   request.form['last_name'],
+                   request.form['email'],
+                   avatar_filename,
+                   request.form['id']
+                 )
+               cursor.execute(sql, values)
+               connection.commit()
+       return redirect('/userview')
+    else:
+        with create_connection() as connection:
+           with connection.cursor() as cursor:
+               sql = "SELECT * FROM users WHERE id = %s"
+               values = (request.args['id'])
+               cursor.execute(sql, values)
+               result = cursor.fetchone()
+        return render_template('edit.html', result=result)
+
+@app.route('/subjectedit', methods=['GET', 'POST'])
+def edit_subject():
+    if session['role'] != 'admin':
+        flash("you can't see it nor edit it")
+        return abort(404)
+    if request.method == 'POST':
+
+       with create_connection() as connection:
+           with connection.cursor() as cursor:
+               sql = """UPDATE subject SET
+               title = %s,
+               subject = %s,
+               description = %s,
+               start_date = %s,
+               end_date = %s,
+               WHERE ID = %s
+               """
+               values = (
+                   request.form['title'],
+                   request.form['subject'],
+                   request.form['description'],
+                   request.form['start_date'],
+                   request.form['end_date'],
+                   request.args['ID']
+                 )
+               cursor.execute(sql, values)
+               connection.commit()
+       return redirect('/userview')
+    return render_template('subject_edit.html', result=result)
 
 @app.route('/')
 def home():

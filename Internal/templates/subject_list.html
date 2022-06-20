@@ -1,0 +1,31 @@
+{% extends '_layout.html' %}
+
+{% block title %}Subject list{% endblock %}
+
+{% block content %}
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Subject</th>
+        <th>Description</th>
+        <th>Start date</th>
+        <th>End date</th>
+    </tr>
+    {% for row in result %}
+    <tr>
+        <td>{{row.ID}}</td>
+        <td>{{row.title}}</td>
+        <td>{{row.subject}}</td>
+        <td>{{row.description}}</td>
+        <td>{{row.start_date}}</td>
+        <td>{{row.end_date}}</td>
+        <td>
+            <!--<a href="/view?id={{row.ID}}">View</a>-->
+            <!--<a href="/edit?id={{row.ID}}">Edit</a>-->
+            <!--<a href="/delete?id={{ row.ID }}" onclick="return confirm('Are you sure you want to delete {{ row.first_name }}')">Delete</a>-->
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

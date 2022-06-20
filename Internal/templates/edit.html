@@ -1,0 +1,36 @@
+{% extends '_layout.html' %}
+
+{% block title%} edit a record {% endblock %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="{{ result.id }}">
+    <input type="hidden" name="old_avatar" value="{{ result.avatar }}">
+    <label for="fn">First name</label>
+    <input id="fn" type="text" name="first_name" value="{{ result.first_name }}" />
+    <br />
+    <label for="ln">Last name</label>
+    <input id="ln" type="text" name="last_name" value="{{ result.last_name }}" />
+    <br />
+    <label for="email">email</label>
+    <input id="email" type="text" name="email" value="{{ result.email }}" />
+    <br />
+    <label for="pic">Profile picture:</label>
+    <input id="pic" type="file" name="avatar"/>
+    <br />
+    <img class=".avatar" src="{{ url_for('static', filename='images/' + (result.avatar or 'default.png'))}}" />
+    <br>
+    <input type="submit" value="Insert new record" />
+</form>
+<script>
+    let fileInput = document.querySelector("#pic");
+    let image = document.querySelector(".avatar");
+
+    fileInput.addEventListener("change", updateImage);
+
+    function updateImage() {
+        image.src = URL.createObjectURL(fileInput.files[0]);
+    }
+</script>
+{% endblock %}
+
