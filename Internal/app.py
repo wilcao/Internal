@@ -71,6 +71,11 @@ def login():
     else:
          return render_template('login.html')
 
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/')
+
 @app.route('/delete')
 def delete():
        with create_connection() as connection:
@@ -80,6 +85,16 @@ def delete():
                cursor.execute(sql, values)
                connection.commit()
        return redirect ('/userview')
+
+@app.route('/subjectdelete')
+def delete_subject():
+       with create_connection() as connection:
+           with connection.cursor() as cursor:
+               sql = "DELETE FROM subject WHERE id = %s"
+               values = (request.args['id'])
+               cursor.execute(sql, values)
+               connection.commit()
+       return redirect ('/subjectview')
 
 @app.route('/view')
 def view_user():
@@ -213,7 +228,7 @@ def edit_subject():
                  )
                cursor.execute(sql, values)
                connection.commit()
-       return redirect('/userview')
+       return redirect('/view_subject')
     return render_template('subject_edit.html', result=result)
 
 @app.route('/')

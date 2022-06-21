@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="flex column">
+
+    <div class="flex row">
+        <p class="profile-name">{{result.first_name}} {{result.last_name}}</p>
+
+        <p class="profile-email">{{result.email}}</p>
+    </div>
+
+</div>
+{% endblock %}
