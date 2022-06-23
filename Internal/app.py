@@ -41,6 +41,14 @@ def view_subject():
                 result = cursor.fetchall()
         return render_template('subject_list.html', result=result)
 
+@app.route('/userlist')
+def user_list():
+        with create_connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT * FROM users")
+                result = cursor.fetchall()
+        return render_template('users_list.html', result=result)
+
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -84,7 +92,7 @@ def delete():
                values = (request.args['id'])
                cursor.execute(sql, values)
                connection.commit()
-       return redirect ('/userview')
+       return redirect ('/user_list')
 
 @app.route('/subjectdelete')
 def delete_subject():
@@ -158,7 +166,7 @@ def add_subject():
 
 @app.route('/edit', methods=['GET', 'POST'])
 def edit():
-    if session['role'] != 'admin' and  str(session['ID']) != request.args['id']:
+    if session['role'] != 'admin' and  str(session['id']) != request.args['id']:
         flash("you can't see it nor edit it")
         return redirect('/view?id=' + request.args['id'])
     if request.method == 'POST':
@@ -179,7 +187,7 @@ def edit():
                first_name = %s,
                last_name = %s,
                email = %s,
-               avatar = %s,
+               avatar = %s
                WHERE id = %s
                """
                values = (
@@ -191,7 +199,7 @@ def edit():
                  )
                cursor.execute(sql, values)
                connection.commit()
-       return redirect('/userview')
+       return redirect('/user_list')
     else:
         with create_connection() as connection:
            with connection.cursor() as cursor:
@@ -207,7 +215,6 @@ def edit_subject():
         flash("you can't see it nor edit it")
         return abort(404)
     if request.method == 'POST':
-
        with create_connection() as connection:
            with connection.cursor() as cursor:
                sql = """UPDATE subject SET
@@ -215,7 +222,7 @@ def edit_subject():
                subject = %s,
                description = %s,
                start_date = %s,
-               end_date = %s,
+               end_date = %s
                WHERE ID = %s
                """
                values = (
@@ -224,7 +231,7 @@ def edit_subject():
                    request.form['description'],
                    request.form['start_date'],
                    request.form['end_date'],
-                   request.args['ID']
+                   request.args['id']
                  )
                cursor.execute(sql, values)
                connection.commit()

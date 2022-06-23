@@ -28,46 +28,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.py" />
-    <Compile Include="Internal\__init__.py" />
-    <Compile Include="Internal\views.py" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Internal\" />
-    <Folder Include="Internal\static\" />
-    <Folder Include="Internal\static\content\" />
-    <Folder Include="Internal\static\fonts\" />
-    <Folder Include="Internal\static\scripts\" />
-    <Folder Include="Internal\templates\" />
+    <Folder Include="static\" />
+    <Folder Include="static\images\" />
     <Folder Include="templates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="requirements.txt" />
-    <Content Include="Internal\static\content\bootstrap.css" />
-    <Content Include="Internal\static\content\bootstrap.min.css" />
-    <Content Include="Internal\static\content\site.css" />
-    <Content Include="Internal\static\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Internal\static\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Internal\static\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Internal\static\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Internal\static\scripts\bootstrap.js" />
-    <Content Include="Internal\static\scripts\bootstrap.min.js" />
-    <Content Include="Internal\static\scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Internal\static\scripts\jquery-1.10.2.js" />
-    <Content Include="Internal\static\scripts\jquery-1.10.2.min.js" />
-    <Content Include="Internal\static\scripts\jquery-1.10.2.min.map" />
-    <Content Include="Internal\static\scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Internal\static\scripts\jquery.validate.js" />
-    <Content Include="Internal\static\scripts\jquery.validate.min.js" />
-    <Content Include="Internal\static\scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Internal\static\scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Internal\static\scripts\modernizr-2.6.2.js" />
-    <Content Include="Internal\static\scripts\respond.js" />
-    <Content Include="Internal\static\scripts\respond.min.js" />
-    <Content Include="Internal\static\scripts\_references.js" />
-    <Content Include="Internal\templates\about.html" />
-    <Content Include="Internal\templates\contact.html" />
-    <Content Include="Internal\templates\index.html" />
-    <Content Include="Internal\templates\layout.html" />
+    <Content Include="static\custom.css" />
+    <Content Include="static\images\8263ad7f.png" />
+    <Content Include="static\images\a7f80294.jpg" />
+    <Content Include="static\images\c48f1307.jpg" />
+    <Content Include="static\images\d4d42eae.png" />
+    <Content Include="static\images\e96d0626.jpg" />
+    <Content Include="static\images\Thumbs.db" />
+    <Content Include="static\styles.css" />
     <Content Include="templates\edit.html" />
     <Content Include="templates\home.html" />
     <Content Include="templates\layout.html" />
