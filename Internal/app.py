@@ -96,13 +96,13 @@ def delete():
 
 @app.route('/subjectdelete')
 def delete_subject():
-       with create_connection() as connection:
-           with connection.cursor() as cursor:
-               sql = "DELETE FROM subject WHERE id = %s"
-               values = (request.args['id'])
-               cursor.execute(sql, values)
-               connection.commit()
-       return redirect ('/subjectview')
+    with create_connection() as connection:
+        with connection.cursor() as cursor:
+            sql = "DELETE FROM subject WHERE id = %s"
+            values = (request.args['id'])
+            cursor.execute(sql, values)
+            connection.commit()
+            return redirect ('/subjectview')
 
 @app.route('/view')
 def view_user():
@@ -111,6 +111,14 @@ def view_user():
                 cursor.execute("SELECT * FROM users WHERE id=%s", request.args['id'])
                 result = cursor.fetchone()
         return render_template('user_view.html', result=result)
+
+@app.route('/subjectselect')
+def select_subject():
+        with create_connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT * FROM subject")
+                result = cursor.fetchall()
+        return render_template ('/subjectselect.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def add_user():
@@ -214,6 +222,12 @@ def edit_subject():
     if session['role'] != 'admin':
         flash("you can't see it nor edit it")
         return abort(404)
+    with create_connection() as connection:
+        with connection.cursor() as cursor:
+            sql = "SELECT * FROM subject WHERE id = %s"
+            values = (request.args['id'])
+            cursor.execute(sql, values)
+            result = cursor.fetchone()
     if request.method == 'POST':
        with create_connection() as connection:
            with connection.cursor() as cursor:
@@ -263,7 +277,7 @@ def check_email():
 
 @app.errorhandler(404)
 def not_found(error):
-    return render_template("notfound.html"), 404
+    return render_template("home.html"), 404
 
 if __name__ == '__main__':
     import os

@@ -50,6 +50,7 @@
     <Content Include="templates\login.html" />
     <Content Include="templates\notfound.html" />
     <Content Include="templates\signup.html" />
+    <Content Include="templates\subjectselect.html" />
     <Content Include="templates\subject_edit.html" />
     <Content Include="templates\subject_add.html" />
     <Content Include="templates\subject_list.html" />

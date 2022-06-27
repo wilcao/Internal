@@ -7,6 +7,7 @@
 <br />
 {% if session['role'] == 'admin' %}
 <a href="{{url_for('user_list')}}">List of users</a>
+<br />
 <a href="{{ url_for('view_subject') }}">View subjects</a>
 <br />
 <a href="{{url_for('add_subject')}}">Add a subject</a>
