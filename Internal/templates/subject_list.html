@@ -21,9 +21,11 @@
         <td>{{row.start_date}}</td>
         <td>{{row.end_date}}</td>
         <td>
-            <!--<a href="/view?id={{row.ID}}">View</a>-->
+            <input type="checkbox" />
+            <!--{% if session['role'] == 'admin' %}-->
             <a href="/subjectedit?id={{row.ID}}">Edit</a>
             <a href="/subjectdelete?id={{ row.ID }}" onclick="return confirm('Are you sure you want to delete {{ row.title }}')">Delete</a>
+            <!--{% endif %}-->
         </td>
     </tr>
     {% endfor %}

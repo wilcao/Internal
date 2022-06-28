@@ -1,6 +1,6 @@
 {% extends '_layout.html' %}
 
-{% block title %}Subject list{% endblock %}
+{% block title %}Subject selection{% endblock %}
 
 {% block content %}
 <table>
@@ -22,7 +22,7 @@
         <td>{{row.end_date}}</td>
         <td>
             <!--<a href="/view?id={{row.ID}}">View</a>-->
-            <a href="/subjectedit?id={{row.ID}}">Edit</a>
+            <!--<a href="/subjectedit?id={{row.ID}}">Edit</a>-->
         </td>
     </tr>
     {% endfor %}
