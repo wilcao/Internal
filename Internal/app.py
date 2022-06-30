@@ -116,9 +116,46 @@ def view_user():
 def select_subject():
         with create_connection() as connection:
             with connection.cursor() as cursor:
-                cursor.execute("SELECT * FROM subject")
+                sql = """SELECT
+	                    users_subject.ID, 
+	                    users_subject.users_id, 
+	                    users_subject.subject_id, 
+	                    `subject`.title, 
+	                    `subject`.`subject`, 
+	                    `subject`.description, 
+	                    `subject`.start_date, 
+	                    `subject`.end_date
+                    FROM
+	                    users
+	                    INNER JOIN
+	                    users_subject
+	                    ON 
+		                    users.ID = users_subject.users_id
+	                    INNER JOIN
+	                    `subject`
+	                    ON 
+		                    users_subject.subject_id = `subject`.ID
+                    WHERE
+	                    users_subject.users_id = %s"""
+                values = (request.args['id'])
+                cursor.execute(sql, values)
                 result = cursor.fetchall()
-        return render_template ('/subjectselect.html')
+        return render_template ('/subjectselect.html', result=result)
+
+@app.route('/addsubjectselection')
+def add_subject_selection():
+        with create_connection() as connection:
+            with connection.cursor() as cursor:
+                sql ="""INSERT INTO subject ( users_id, subject_id) VALUES (%s, %s)"""
+                values = (
+                    request.args['users_id'],
+                    request.args['subject_id'],
+
+                    )
+                cursor.execute(sql, values)
+                connection.commit()
+                return redirect(url_for('home'))
+        return redirect('/subjectselect')
 
 @app.route('/register', methods=['GET', 'POST'])
 def add_user():
