@@ -142,20 +142,41 @@ def select_subject():
                 result = cursor.fetchall()
         return render_template ('/subjectselect.html', result=result)
 
+@app.route('/deletesubjectselection')
+def delete_selectedsubject():
+    with create_connection() as connection:
+        with connection.cursor() as cursor:
+            sql ="""SELECT * FROM users_subject WHERE id = %s"""
+            values = (
+                request.args['id']
+                    )
+            cursor.execute(sql, values)
+            result = cursor.fetchone()
+    if session['role'] != 'admin' and str(session['ID']) != (
+                                                    str(result['users_id'])):
+        return redirect(url_for('home'))
+    with create_connection() as connection:
+        with connection.cursor() as cursor:
+            sql = "DELETE FROM users_subject WHERE id = %s"
+            values = (
+                request.args['id']
+            )
+            cursor.execute(sql, values)
+            connection.commit()
+            return redirect(url_for('select_subject', id=session['ID']))
+
 @app.route('/addsubjectselection')
 def add_subject_selection():
         with create_connection() as connection:
             with connection.cursor() as cursor:
-                sql ="""INSERT INTO subject ( users_id, subject_id) VALUES (%s, %s)"""
+                sql ="""INSERT INTO users_subject ( users_id, subject_id) VALUES (%s, %s)"""
                 values = (
                     request.args['users_id'],
                     request.args['subject_id'],
-
                     )
                 cursor.execute(sql, values)
                 connection.commit()
-                return redirect(url_for('home'))
-        return redirect('/subjectselect')
+        return redirect(url_for('select_subject', id=session['ID']))
 
 @app.route('/register', methods=['GET', 'POST'])
 def add_user():

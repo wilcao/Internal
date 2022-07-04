@@ -11,11 +11,15 @@
 </head>
 <body>
     <nav>
+        <ul>
+        <a href="{{ url_for('home') }}">Home</a>
         {% if 'logged_in' in session %}
-        you are logged in as {{ session.first_name }} <a href="/logout">Logout</a>
+        you are logged in as {{ session.first_name }}
+        <a href="/logout">Logout</a>
         {% else %}
         <a href="/login">Login</a>
         {% endif %}
+        </ul>
     </nav>
     {% block content %}
     {% endblock %}

@@ -21,10 +21,11 @@
         <td>{{row.start_date}}</td>
         <td>{{row.end_date}}</td>
         <td>
-            <!--<a href="/view?id={{row.ID}}">View</a>-->
-            <!--<a href="/subjectedit?id={{row.ID}}">Edit</a>-->
+            <a href="/deletesubjectselection?id={{row.ID}}">Unselect</a>
+
         </td>
     </tr>
     {% endfor %}
 </table>
+<a href="{{ url_for('view_subject') }}">View subjects</a>
 {% endblock %}
