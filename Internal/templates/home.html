@@ -3,7 +3,6 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<a href="{{url_for('add_user')}}">Sign up</a>
 <br />
 {% if session['role'] == 'admin' %}
 <a href="{{url_for('user_list')}}">List of users</a>

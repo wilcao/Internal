@@ -3,7 +3,7 @@
 {% block title %}Subject selection{% endblock %}
 
 {% block content %}
-<table>
+<table id="list">
     <tr>
         <th>ID</th>
         <th>Title</th>
@@ -11,6 +11,7 @@
         <th>Description</th>
         <th>Start date</th>
         <th>End date</th>
+        <th>Action</th>
     </tr>
     {% for row in result %}
     <tr>

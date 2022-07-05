@@ -3,8 +3,7 @@
 {% block title %}Subject list{% endblock %}
 
 {% block content %}
-<a href="{{ url_for('home') }}">Home</a>
-<table>
+<table id="list">
     <tr>
         <th>ID</th>
         <th>Title</th>
@@ -12,6 +11,7 @@
         <th>Description</th>
         <th>Start date</th>
         <th>End date</th>
+        <th>Actions</th>
     </tr>
     {% for row in result %}
     <tr>
@@ -22,10 +22,10 @@
         <td>{{row.start_date}}</td>
         <td>{{row.end_date}}</td>
         <td>
-            <!--{% if session['role'] == 'admin' %}-->
+            {% if session['role'] == 'admin' %}
             <a href="/subjectedit?id={{row.ID}}">Edit</a>
             <a href="/subjectdelete?id={{ row.ID }}" onclick="return confirm('Are you sure you want to delete {{ row.title }}')">Delete</a>
-            <!--{% endif %}-->
+            {% endif %}
             <a href="/addsubjectselection?users_id={{session.ID}}&subject_id={{row.ID}}">Select</a>
             <i class="fa fa-check"></i>
         </td>

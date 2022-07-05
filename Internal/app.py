@@ -74,7 +74,7 @@ def login():
             session['ID'] = result['ID']
             return redirect ('/')
         else:
-            flash("cry about it")
+            flash("Wrong username or password")
             return redirect("/login")
     else:
          return render_template('login.html')

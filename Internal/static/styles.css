@@ -29,8 +29,46 @@ ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    overflow: hidden;
+    background-color: #87CEEB;
 }
 
 li {
-    display: inline;
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+
+#list {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#list td, #list th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    }
+
+#list tr:nth-child(even) {
+    background-color: #f2f2f2;
+    }
+
+
+#list th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
 }
