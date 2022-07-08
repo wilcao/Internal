@@ -109,8 +109,29 @@ def view_user():
         with create_connection() as connection:
             with connection.cursor() as cursor:
                 cursor.execute("SELECT * FROM users WHERE id=%s", request.args['id'])
-                result = cursor.fetchone()
-        return render_template('user_view.html', result=result)
+                user_info = cursor.fetchone()
+
+                sql ="""SELECT
+	                    `subject`.title, 
+	                    `subject`.`subject`, 
+	                    `subject`.description, 
+	                    `subject`.start_date, 
+	                    `subject`.end_date, 
+	                    users_subject.*
+                    FROM
+	                    users_subject
+	                    INNER JOIN
+	                    `subject`
+	                    ON 
+		                    users_subject.subject_id = `subject`.ID
+                    WHERE
+	                    users_subject.users_id = %s"""
+                values = (
+                    request.args['id'],
+                    )
+                cursor.execute(sql, values)
+                subject_info = cursor.fetchall()
+        return render_template('user_view.html', user_info=user_info,subject_info=subject_info)
 
 @app.route('/subjectselect')
 def select_subject():

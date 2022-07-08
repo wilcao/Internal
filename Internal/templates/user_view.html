@@ -1,16 +1,36 @@
-{% extends 'layout.html' %}
+{% extends '_layout.html' %}
 
 {% block title %}Home{% endblock %}
 
 {% block content %}
 <div class="flex column">
-    <img class="profile-pic" src="{{url_for('static', filename='images/' + (result.avatar or 'default.png'))}}" />
+    <img class="profile-pic" src="{{url_for('static', filename='images/' + (user_info.avatar or 'default.png'))}}" />
 
     <div class="flex row">
-        <p class="profile-name">{{result.first_name}} {{result.last_name}}</p>
+        <p class="profile-name">{{user_info.first_name}} {{user_info.last_name}}</p>
 
-        <p class="profile-email">{{result.email}}</p>
+        <p class="profile-email">{{user_info.email}}</p>
     </div>
-
 </div>
+
+<table id="list">
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Subject</th>
+        <th>Description</th>
+        <th>Start date</th>
+        <th>End date</th>
+    </tr>
+    {% for row in subject_info %}
+    <tr>
+        <td>{{row.subject_id}}</td>
+        <td>{{row.title}}</td>
+        <td>{{row.subject}}</td>
+        <td>{{row.description}}</td>
+        <td>{{row.start_date}}</td>
+        <td>{{row.end_date}}</td>
+    </tr>
+    {% endfor %}
+</table>
 {% endblock %}
