@@ -190,11 +190,19 @@ def delete_selectedsubject():
 def add_subject_selection():
         with create_connection() as connection:
             with connection.cursor() as cursor:
+                sql ="""SELECT * FROM users_subject WHERE users_id = %s"""
+                values = (
+                    request.args ['users_id'])
+                cursor.execute(sql, values)
+                check = cursor.fetchall()
+                if len(check) >= 5:
+                    flash("maximum 5 subjects only")
+                    return redirect(url_for('select_subject', id=session['ID']))
                 sql ="""INSERT INTO users_subject ( users_id, subject_id) VALUES (%s, %s)"""
                 values = (
-                    request.args['users_id'],
-                    request.args['subject_id'],
-                    )
+                        request.args['users_id'],
+                        request.args['subject_id'],
+                        )
                 cursor.execute(sql, values)
                 connection.commit()
         return redirect(url_for('select_subject', id=session['ID']))
@@ -330,6 +338,7 @@ def edit_subject():
                connection.commit()
        return redirect('/view_subject')
     return render_template('subject_edit.html', result=result)
+
 
 @app.route('/')
 def home():
