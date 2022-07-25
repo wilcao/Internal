@@ -184,7 +184,7 @@ def delete_selectedsubject():
             )
             cursor.execute(sql, values)
             connection.commit()
-            return redirect(url_for('select_subject', id=session['ID']))
+            return redirect(url_for('view_subject', id=session['ID']))
 
 @app.route('/addsubjectselection')
 def add_subject_selection():
