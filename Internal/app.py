@@ -110,7 +110,6 @@ def view_user():
             with connection.cursor() as cursor:
                 cursor.execute("SELECT * FROM users WHERE id=%s", request.args['id'])
                 user_info = cursor.fetchone()
-
                 sql ="""SELECT
 	                    `subject`.title, 
 	                    `subject`.`subject`, 

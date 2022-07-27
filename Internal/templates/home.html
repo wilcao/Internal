@@ -13,8 +13,6 @@
 {% elif 'logged_in' in session %}
 <a href="{{ url_for('view_user', id=session['ID']) }}">View your account</a>
 <br />
-<a href="{{url_for('add_subject')}}">Add a subject</a>
-<br />
 <a href="{{ url_for('view_subject') }}">View subjects</a>
 <br />
 {% endif %}
