@@ -27,12 +27,14 @@ with create_connection() as connection:
 for row in result:
     print("first_name", row ['first_name'], "as last_name", row ['last_name'])
 
+#if logged in users account, it will restrict certain pages which is admin only access
 @app.before_request
 def restrict():
     restricted_pages = ['userview', 'view_user', 'delete', 'edit']
     if 'logged_in' not in session and request.endpoint in restricted_pages: 
         return redirect('/login')
 
+#viewing the list of users
 @app.route('/subjects')
 def view_subject():
         with create_connection() as connection:
@@ -41,6 +43,7 @@ def view_subject():
                 result = cursor.fetchall()
         return render_template('subject_list.html', result=result)
 
+#list of users that only the admin can see
 @app.route('/userlist')
 def user_list():
         with create_connection() as connection:
@@ -50,11 +53,11 @@ def user_list():
         return render_template('users_list.html', result=result)
 
 
-
+#logging in 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-
+        #checks for correct password
         password =  request.form['password']
         encrypted_password = hashlib.sha256(password.encode()).hexdigest()
 
@@ -79,21 +82,25 @@ def login():
     else:
          return render_template('login.html')
 
+#logging out of the account
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect('/')
 
+#deleting the users account
 @app.route('/delete')
 def delete():
        with create_connection() as connection:
            with connection.cursor() as cursor:
-               sql = "DELETE FROM users WHERE id = %s"
+               sql = "DELETE FROM users, users_subject WHERE id = %s"
                values = (request.args['id'])
                cursor.execute(sql, values)
                connection.commit()
+               result = cursor.fetchone()
        return redirect ('/user_list')
 
+#deleting the subject, not unselecting
 @app.route('/subjectdelete')
 def delete_subject():
     with create_connection() as connection:
@@ -104,6 +111,7 @@ def delete_subject():
             connection.commit()
             return redirect ('/subjectview')
 
+#viewing the the users profile
 @app.route('/view')
 def view_user():
         with create_connection() as connection:
@@ -132,6 +140,7 @@ def view_user():
                 subject_info = cursor.fetchall()
         return render_template('user_view.html', user_info=user_info,subject_info=subject_info)
 
+#selecting a subject
 @app.route('/subjectselect')
 def select_subject():
         with create_connection() as connection:
@@ -162,6 +171,7 @@ def select_subject():
                 result = cursor.fetchall()
         return render_template ('/subjectselect.html', result=result)
 
+#unselecting a subject
 @app.route('/deletesubjectselection')
 def delete_selectedsubject():
     with create_connection() as connection:
@@ -172,6 +182,7 @@ def delete_selectedsubject():
                     )
             cursor.execute(sql, values)
             result = cursor.fetchone()
+            #checks whether the account has admin role or not
     if session['role'] != 'admin' and str(session['ID']) != (
                                                     str(result['users_id'])):
         return redirect(url_for('home'))
@@ -185,6 +196,7 @@ def delete_selectedsubject():
             connection.commit()
             return redirect(url_for('view_subject', id=session['ID']))
 
+#when selecting a subject, you can only select up to 5
 @app.route('/addsubjectselection')
 def add_subject_selection():
         with create_connection() as connection:
@@ -206,13 +218,14 @@ def add_subject_selection():
                 connection.commit()
         return redirect(url_for('select_subject', id=session['ID']))
 
+#creating a new account
 @app.route('/register', methods=['GET', 'POST'])
 def add_user():
     if request.method== 'POST':
-
+        #changes the password to a encrypted type password, when checking on mysql workbench, it will show the encrypted password and not actual password that the user has input
         password =  request.form['password']
         encrypted_password = hashlib.sha256(password.encode()).hexdigest()
-
+        #for the users avatar
         if request.files['avatar'].filename:
             avatar_image = request.files['avatar']
             ext = os.path.splitext(avatar_image.filename)[1]
@@ -239,6 +252,7 @@ def add_user():
         return redirect('/')
     return render_template('users_add.html')
 
+#adding a subject
 @app.route('/subjectadd', methods=['GET', 'POST'])
 def add_subject():
     if request.method== 'POST':
@@ -258,12 +272,15 @@ def add_subject():
         return redirect('/')
     return render_template('subject_add.html')
 
+#edit's the users detail for admin only
 @app.route('/edit', methods=['GET', 'POST'])
 def edit():
     if session['role'] != 'admin' and  str(session['id']) != request.args['id']:
+        #if user tries to go on the page and edit another user, it will output the flash
         flash("you can't see it nor edit it")
         return redirect('/view?id=' + request.args['id'])
     if request.method == 'POST':
+        #edits the users avatar
        avatar_image=request.files['avatar']
        ext = os.path.splitext(avatar_image.filename)[1]
        avatar_filename= str(uuid.uuid4())[:8] + ext
@@ -303,10 +320,13 @@ def edit():
                result = cursor.fetchone()
         return render_template('edit.html', result=result)
 
+#edit the subjects which only the admin can do
 @app.route('/subjectedit', methods=['GET', 'POST'])
 def edit_subject():
+    #checks for whether account has admin role or not, if not, will output the flash
     if session['role'] != 'admin':
         flash("you can't see it nor edit it")
+        #if doesn't have admin role, will send them to 404 page
         return abort(404)
     with create_connection() as connection:
         with connection.cursor() as cursor:
@@ -338,7 +358,7 @@ def edit_subject():
        return redirect('/view_subject')
     return render_template('subject_edit.html', result=result)
 
-
+#home page
 @app.route('/')
 def home():
     with create_connection() as connection:
@@ -347,6 +367,7 @@ def home():
             result = cursor.fetchall()
     return render_template('home.html', data=result)
 
+#checking whether email has been used or not
 @app.route('/checkemail')
 def check_email():
         with create_connection() as connection:
@@ -361,7 +382,7 @@ def check_email():
             return jsonify({ 'status': 'Error' })
         else:
             return jsonify({ 'status': 'OK' }) 
-
+#error 404
 @app.errorhandler(404)
 def not_found(error):
     return render_template("home.html"), 404
