@@ -6,13 +6,16 @@
 <form method="post" enctype="multipart/form-data">
     <input type="hidden" name="id" value="{{ result.id }}">
     <input type="hidden" name="old_avatar" value="{{ result.avatar }}">
-    <label for="fn">First name</label>
+    <label for="fn">First name:</label>
+    <br />
     <input id="fn" type="text" name="first_name" value="{{ result.first_name }}" />
     <br />
-    <label for="ln">Last name</label>
+    <label for="ln">Last name:</label>
+    <br />
     <input id="ln" type="text" name="last_name" value="{{ result.last_name }}" />
     <br />
-    <label for="email">email</label>
+    <label for="email">email:</label>
+    <br />
     <input id="email" type="text" name="email" value="{{ result.email }}" />
     <br />
     <label for="pic">Profile picture:</label>

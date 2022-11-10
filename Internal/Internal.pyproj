@@ -44,6 +44,8 @@
     <Content Include="static\images\d4d42eae.png" />
     <Content Include="static\images\e96d0626.jpg" />
     <Content Include="static\images\Thumbs.db" />
+    <Content Include="static\login.css" />
+    <Content Include="static\signup.css" />
     <Content Include="static\styles.css" />
     <Content Include="templates\edit.html" />
     <Content Include="templates\home.html" />

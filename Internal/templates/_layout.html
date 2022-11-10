@@ -13,13 +13,13 @@
 <body>
     <nav>
         <ul>
-        <a href="{{ url_for('home') }}">Home</a>
-        {% if 'logged_in' in session %}
-        <a href="/logout">Logout</a>
-        {% else %}
-        <a href="/login">Login</a>
-        <a href="{{url_for('add_user')}}">Sign up</a>
-        {% endif %}
+            <a href="{{ url_for('home') }}">Home</a>
+            {% if 'logged_in' in session %}
+            <a href="/logout">Logout</a>
+            {% else %}
+            <a href="/login">Login</a>
+            <a href="{{url_for('add_user')}}">Sign up</a>
+            {% endif %}
         </ul>
     </nav>
     {% block content %}
@@ -31,3 +31,33 @@
     </ul>
 </body>
 </html>
+
+<!-- Remove the container if you want to extend the Footer to full width. -->
+<div class="container my-5">
+
+<center><footer class="text-center text-lg-start"">
+     <div class="container d-flex justify-content-center py-5">
+         <button type="button" class="btn btn-primary btn-lg btn-floating mx-2"">
+             <i class="fab fa-facebook-f"></i>
+         </button>
+         <button type="button" class="btn btn-primary btn-lg btn-floating mx-2"">
+             <i class="fab fa-youtube"></i>
+         </button>
+         <button type="button" class="btn btn-primary btn-lg btn-floating mx-2"">
+             <i class="fab fa-instagram"></i>
+         </button>
+         <button type="button" class="btn btn-primary btn-lg btn-floating mx-2"">
+             <i class="fab fa-twitter"></i>
+         </button>
+     </div>
+
+        <!-- Copyright -->
+<div class="text-center text-white p-3" style="background-color: rgba(0, 0, 0, 0);">
+© 2022 Copyright:
+ <a class="text-white" href="https://knowyourmeme.com/memes/trollface">click here for free $</a>
+</div>
+        <!-- Copyright -->
+</footer> </center>
+
+</div>
+<!-- End of .container -->

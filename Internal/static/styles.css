@@ -52,7 +52,7 @@ li a:hover {
 #list {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: 100%;
+    width: 50%;
 }
 
 #list td, #list th {
@@ -74,5 +74,6 @@ li a:hover {
 }
 
 .viewsubjects {
-    float: right;
+    float: left;
 }
+
