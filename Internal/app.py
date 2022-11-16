@@ -93,11 +93,15 @@ def logout():
 def delete():
        with create_connection() as connection:
            with connection.cursor() as cursor:
-               sql = "DELETE FROM users, users_subject WHERE id = %s"
+               sql = "DELETE FROM users_subject WHERE users_id = %s"
                values = (request.args['id'])
                cursor.execute(sql, values)
                connection.commit()
-               result = cursor.fetchone()
+               sql = "DELETE FROM users WHERE ID = %s"
+               values = (request.args['id'])
+               cursor.execute(sql, values)
+               connection.commit()
+               #result = cursor.fetchone()
        return redirect ('/user_list')
 
 #deleting the subject, not unselecting
@@ -382,6 +386,7 @@ def check_email():
             return jsonify({ 'status': 'Error' })
         else:
             return jsonify({ 'status': 'OK' }) 
+
 #error 404
 @app.errorhandler(404)
 def not_found(error):

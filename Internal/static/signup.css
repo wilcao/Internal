@@ -9,10 +9,10 @@
 
 
 .container {
+    margin-top: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
 }
 
 .screen {
@@ -81,10 +81,10 @@
     border-radius: 60px;
 }
 
-.login {
+.signup {
     width: 320px;
     padding: 30px;
-    padding-top: 156px;
+    padding-top: 100px;
 }
 
 .signup__field {
@@ -134,12 +134,12 @@
     transition: .2s;
 }
 
-    .login__submit:active,
-    .login__submit:focus,
-    .login__submit:hover {
-        border-color: #6A679E;
-        outline: none;
-    }
+.signup__submit:active,
+.signup__submit:focus,
+.signup__submit:hover {
+    border-color: #6A679E;
+    outline: none;
+}
 
 .button__icon {
     font-size: 24px;
@@ -147,7 +147,7 @@
     color: #7875B5;
 }
 
-.social-login {
+.social-signup {
     position: absolute;
     height: 140px;
     width: 160px;
@@ -163,13 +163,13 @@
     justify-content: center;
 }
 
-.social-login__icon {
+.social-signup__icon {
     padding: 20px 10px;
     color: #fff;
     text-decoration: none;
     text-shadow: 0px 0px 8px #7875B5;
 }
 
-    .social-login__icon:hover {
-        transform: scale(1.5);
-    }
+.social-signup__icon:hover {
+    transform: scale(1.5);
+}

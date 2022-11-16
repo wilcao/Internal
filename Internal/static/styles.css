@@ -3,17 +3,17 @@ table {
 }
 
 th, td {
-    border: 1px;
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: Arial, sans-serif;
 }
 
-img {
-    border-radius: 50%;
-    aspect-ratio: 1;
-    object-fit: cover;
+.responsive {
+    width: 100%;
 }
 
 .btn {
@@ -77,3 +77,30 @@ li a:hover {
     float: left;
 }
 
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav-right {
+    float: right;
+}

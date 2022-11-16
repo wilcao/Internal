@@ -7,21 +7,24 @@
 <div class="container">
     <div class="screen">
         <div class="screen__content">
-            <form class="login" method="post" enctype="multipart/form-data">
+            <form class="signup" method="post" enctype="multipart/form-data">
                 <div class="signup__field">
-                    <input id="first_name" class="signup__input" placeholder="First name">
+                    <i class="signup__icon fas fa-user"></i>
+                    <input id="First_name" class="signup__input" placeholder="First name" name="first_name">
                 </div>
                 <div class="signup__field">
-                    <input id="last_name" class="signup__input" placeholder="Last name">
+                    <i class="signup__icon fas fa-user"></i>
+                    <input id="Last_name" class="signup__input" placeholder="Last name" name="last_name">
                 </div>
                 <div class="signup__field">
-                    <input type="text" id="email" class="signup__input" name="email" placeholder=" Email">
+                    <i class="signup__icon fas fa-envelope"></i>
+                    <input type="text" id="Email" class="signup__input" name="email" placeholder=" Email">
                     <p id="message"></p>
                 </div>
 
                 <div class="signup__field">
                     <i class="signup__icon fas fa-lock"></i>
-                    <input type="password" id="password" name="password" class="signup__input" placeholder="Password">
+                    <input type="Password" id="Password" name="password" class="signup__input" placeholder="Password">
                 </div>
                 <div class="signup__field">
                     <input id="pic" type="file" name="avatar">

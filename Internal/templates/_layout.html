@@ -4,49 +4,50 @@
 <head>
     <meta charset="utf-8" />
     <title>{% block title %}{% endblock%}</title>
-    <meta name="viewport" content="width=device-width, initial-scale-1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename="styles.css") }}">
     <link rel="stylesheet" href="{{ url_for('static', filename="custom.css") }}">
     <!-- Font awesome -->
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>
-<body>
-    <nav>
-        <ul>
-            <a href="{{ url_for('home') }}">Home</a>
-            {% if 'logged_in' in session %}
-            <a href="/logout">Logout</a>
-            {% else %}
-            <a href="/login">Login</a>
-            <a href="{{url_for('add_user')}}">Sign up</a>
-            {% endif %}
-        </ul>
-    </nav>
-    {% block content %}
-    {% endblock %}
-    <ul>
-        {% for message in get_flashed_messages() %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-</body>
+<div class="topnav">
+    <a href="{{ url_for('home') }}">Home</a>
+    {% if 'logged_in' in session %}
+    <div class="topnav-right">
+    <a href="/logout">Logout</a>
+    </div>
+    {% else %}
+    <a href="/login">Login</a>
+    <a href="{{url_for('add_user')}}">Sign up</a>
+    {% endif %}
+</div>
+{% block content %}
+{% endblock %}
+<ul>
+    {% for message in get_flashed_messages() %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
 </html>
 
 <!-- Remove the container if you want to extend the Footer to full width. -->
 <div class="container my-5">
 
-<center><footer class="text-center text-lg-start"">
+<center><footer class="text-center text-lg-start">
      <div class="container d-flex justify-content-center py-5">
-         <button type="button" class="btn btn-primary btn-lg btn-floating mx-2"">
+         <button type="button" href="#" class="btn btn-primary btn-lg btn-floating mx-2" aria-label="Facebook">Facebook
              <i class="fab fa-facebook-f"></i>
          </button>
-         <button type="button" class="btn btn-primary btn-lg btn-floating mx-2"">
+         <button type="button" href="#" class="btn btn-primary btn-lg btn-floating mx-2" aria-label="Youtube">Youtube
              <i class="fab fa-youtube"></i>
          </button>
-         <button type="button" class="btn btn-primary btn-lg btn-floating mx-2"">
+         <button type="button" href="#" class="btn btn-primary btn-lg btn-floating mx-2" aria-label="Instagram">Instgram
              <i class="fab fa-instagram"></i>
          </button>
-         <button type="button" class="btn btn-primary btn-lg btn-floating mx-2"">
+         <button type="button" href="#" class="btn btn-primary btn-lg btn-floating mx-2" aria-label="Twitter">Twitter
              <i class="fab fa-twitter"></i>
          </button>
      </div>
@@ -54,7 +55,7 @@
         <!-- Copyright -->
 <div class="text-center text-white p-3" style="background-color: rgba(0, 0, 0, 0);">
 © 2022 Copyright:
- <a class="text-white" href="https://knowyourmeme.com/memes/trollface">click here for free $</a>
+ <a class="text-white" href="https://knowyourmeme.com/memes/trollface">A button</a>
 </div>
         <!-- Copyright -->
 </footer> </center>
