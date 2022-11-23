@@ -3,28 +3,33 @@
 {% block title %}Edit subject{% endblock %}
 
 {% block content %}
-<form method="post" enctype="multipart/form-data">
-    <label for="title">Title</label>
+<form method="post" enctype="multipart/form-data" class="form">
+    <label for="title">Title:</label>
+    <br />
     <input id="title" name="title" value="{{result.title}}" />
     <br />
-    <label for="subject">Subject</label>
+    <label for="subject">Subject:</label>
+    <br />
     <input id="subject" name="subject"value="{{result.subject}}" />
     <br />
-    <label for="description">Description</label>
+    <label for="description">Description:</label>
+    <br />
     <input id="description" name="description" value="{{result.description}}" />
     <br />
     <label for="start_date">Start date:</label>
+    <br />
     <input type="date" id="start_date" name="start_date"
            value="{{result.start_date}}"
            min="2022-01-01" max="2026-12-31">
     <br />
     <label for="end_date">End date:</label>
-
+    <br />
     <input type="date" id="end_date" name="end_date"
            value="{{result.end_date}}"
            min="2022-01-01" max="2026-12-31">
     <br />
-    <input type="submit" value="edit" />
+    <br />
+    <input type="submit" value="Submit" />
 </form>
 
 {% endblock %}

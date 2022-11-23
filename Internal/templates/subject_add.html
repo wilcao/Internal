@@ -3,7 +3,7 @@
 {% block title %}Subject add{% endblock %}
 
 {% block content %}
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" class="form">
     <label for="title">Title:</label>
     <br />
     <input id="title" name="title" />
@@ -11,10 +11,6 @@
     <label for="subject">Subject:</label>
     <br />
     <input id="subject" name="subject" />
-    <br />
-    <label for="description">Description:</label>
-    <br />
-    <input id="description" name="description" />
     <br />
     <label for="start_date">Start date:</label>
     <br />
@@ -27,6 +23,11 @@
     <input type="date" id="end_date" name="end_date"
            value="2022-01-01"
            min="2022-01-01" max="2026-12-31">
+    <br />
+    <label for="description">Description:</label>
+    <br />
+    <input id="description" name="description" />
+    <br />
     <br />
     <input type="submit" value="Add a subject" />
 </form>

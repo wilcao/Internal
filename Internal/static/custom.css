@@ -25,3 +25,10 @@
     flex-direction: column;
 }
 
+.form {
+    margin: 20px auto;
+    width: fit-content;
+    padding: 20px;
+    background: #329443;
+    border-radius: 10px;
+}

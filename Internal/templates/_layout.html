@@ -15,9 +15,17 @@
 </head>
 <div class="topnav">
     <a href="{{ url_for('home') }}">Home</a>
+    {% if session['role'] == 'admin' %}
+    <a href="{{url_for('user_list')}}" class="w3-bar-item w3-button">List of users</a>
+    <a href="{{url_for('add_subject')}}" class="w3-bar-item w3-button">Add a subjects</a>
+    <a href="{{ url_for('view_subject') }}" class="w3-bar-item w3-button">View subjects</a>
+    {% elif 'logged_in' in session %}
+    <a href="{{ url_for('view_user', id=session['ID']) }}" class="w3-bar-item w3-button">View your account</a>
+    <a href="{{ url_for('view_subject') }}" class="w3-bar-item w3-button w3-hide-small">View subjects</a>
+    {% endif %}
     {% if 'logged_in' in session %}
     <div class="topnav-right">
-    <a href="/logout">Logout</a>
+        <a href="/logout">Logout</a>
     </div>
     {% else %}
     <a href="/login">Login</a>
